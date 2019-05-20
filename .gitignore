@@ -1,0 +1,7 @@
+.vs
+
+src/obj
+src/bin
+
+# volumes data from docker container
+devops/data
