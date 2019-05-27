@@ -23,15 +23,21 @@ namespace dotnetsqlserverexample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var development = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD");
+            var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST");
+            var connectString = $"Server={hostname};Database=master;User Id=sa;Password={password};";
+
             // https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
             services.AddDbContext<AppContext>(options =>
             {
                 options.UseSqlServer(
-                    Configuration["ConnectionString"],
+                    //Configuration["ConnectionString"],
+                    connectString,
                     sqlServerOptionsAction: sqlOptions =>
                     {
                         sqlOptions.EnableRetryOnFailure(
-                            maxRetryCount: 10,
+                            maxRetryCount: 5,
                             maxRetryDelay: TimeSpan.FromSeconds(30),
                             errorNumbersToAdd: null);
                     });
