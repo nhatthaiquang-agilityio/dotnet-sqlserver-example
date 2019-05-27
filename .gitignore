@@ -1,9 +1,8 @@
 .vs
+.DS_Store
 
-src/obj
-src/bin
-src/dotnet-sqlserver-example/obj
-src/dotnet-sqlserver-example/bin
+obj/
+bin/
 
 # volumes data from docker container
 devops/data
