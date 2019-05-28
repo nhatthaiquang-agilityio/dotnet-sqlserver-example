@@ -23,7 +23,7 @@ namespace dotnetsqlserverexample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var development = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD");
             var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST");
             var connectString = $"Server={hostname};Database=master;User Id=sa;Password={password};";
@@ -32,7 +32,6 @@ namespace dotnetsqlserverexample
             services.AddDbContext<AppContext>(options =>
             {
                 options.UseSqlServer(
-                    //Configuration["ConnectionString"],
                     connectString,
                     sqlServerOptionsAction: sqlOptions =>
                     {

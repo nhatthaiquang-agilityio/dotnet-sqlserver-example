@@ -2,14 +2,12 @@ FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-# using docker: we will use src.sln and src.csproj
 COPY dotnet-sqlserver-example.sln .
 COPY dotnet-sqlserver-example/dotnet-sqlserver-example.csproj ./src/
 RUN dotnet restore
 
 # copy everything else and build app
 COPY dotnet-sqlserver-example/. ./src/
-# RUN rm -rf ./src/dotnet-sqlserver-example.csproj
 WORKDIR /app/src
 RUN dotnet publish -c Release -o out
 
