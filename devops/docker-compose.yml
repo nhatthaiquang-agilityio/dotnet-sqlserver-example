@@ -7,8 +7,8 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
-    # volumes:
-    #   - ./data:/var/opt/mssql
+    volumes:
+      - mssql_server_data:/var/opt/mssql
 
   web:
     container_name: web
@@ -21,3 +21,5 @@ services:
       SQLSERVER_SA_PASSWORD: "Your_password123"
     depends_on:
       - db
+volumes:
+  mssql_server_data:
