@@ -40,8 +40,6 @@ namespace Testing
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
             var product = JsonConvert.DeserializeObject<Product>(responseString);
-            // Console.WriteLine(product);
-
             Assert.True(product.Id > 0);
         }
     }
