@@ -7,7 +7,7 @@ namespace dotnetsqlserverexample.Models
         public AppContext(DbContextOptions<AppContext> options) : base(options)
         {
             this.Database.EnsureCreated();
-            this.Database.Migrate();
+            //this.Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

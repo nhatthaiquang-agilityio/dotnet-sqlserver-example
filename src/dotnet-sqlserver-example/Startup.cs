@@ -23,7 +23,12 @@ namespace dotnetsqlserverexample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDatabase(services);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
 
+        public virtual void ConfigureDatabase(IServiceCollection services)
+        {
             var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD");
             var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST");
             var connectString = $"Server={hostname};Database=master;User Id=sa;Password={password};";
@@ -38,11 +43,10 @@ namespace dotnetsqlserverexample
                         sqlOptions.EnableRetryOnFailure(
                             maxRetryCount: 5,
                             maxRetryDelay: TimeSpan.FromSeconds(30),
-                            errorNumbersToAdd: null);
+                            errorNumbersToAdd: null);  
                     });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
