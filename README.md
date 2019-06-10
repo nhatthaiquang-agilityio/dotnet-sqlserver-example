@@ -47,3 +47,15 @@ docker-compose up
 #### Start project in Visual Studio
 Open dotnet-sqlserver-example.csproj
 Run sql server in docker and run code in visual studio
+
+### Testing
+------------
+Apply Integration Test with In-Memory
+```
+cd src/Testing
+dotnet test
+```
+
+### Reference
+--------------
++ [Integration Testing](https://www.dotnetcurry.com/aspnet-core/1420/integration-testing-aspnet-core)
