@@ -13,7 +13,6 @@ namespace Testing
         [Fact]
         public async Task Test_Get_Products()
         {
-            Console.WriteLine(_client);
             // Act
             var response = await _client.GetAsync("/api/products");
 
