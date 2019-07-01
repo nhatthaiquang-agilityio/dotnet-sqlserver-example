@@ -29,15 +29,11 @@ namespace dotnetsqlserverexample
 
         public virtual void ConfigureDatabase(IServiceCollection services)
         {
-            var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD");
-            var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST");
-            var connectString = $"Server={hostname};Database=master;User Id=sa;Password={password};";
-
             // https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
             services.AddDbContext<AppContext>(options =>
             {
                 options.UseSqlServer(
-                    connectString,
+                    Configuration["ConnectionString"],
                     sqlServerOptionsAction: sqlOptions =>
                     {
                         sqlOptions.EnableRetryOnFailure(
